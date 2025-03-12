@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/execution-environment.json": "file:///Users/hishikur/Documents/GitHub/eda-insights/rulebooks/insights-eda-malware-rulebook.bk.yml"
+    },
+    "ansible.python.interpreterPath": "/Users/hishikur/.pyenv/versions/ansible2.9-python3.6/bin/python"
+}
