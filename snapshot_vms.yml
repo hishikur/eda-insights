@@ -2,6 +2,26 @@
 - name: Create Malware Incident
   gather_facts: no
   tasks:
+  - name: Get all VirtualMachines in the namespace
+    redhat.openshift_virtualization.kubevirt_vm_info:
+      namespace: "{{ vm_namespace }}"
+    register: vm_info
+
+  - name: Debug the vm_info variable
+    ansible.builtin.debug:
+      var: vm_info
+
+  - name: Wait until the VirtualMachine is stopped
+    redhat.openshift_virtualization.kubevirt_vm:
+      name: "{{ item.metadata.name }}"
+      namespace: "{{ item.metadata.namespace }}"
+      run_strategy: Halted
+      wait: true
+    loop: "{{ vm_info.resources }}"
+    loop_control:
+      label: "{{ item.metadata.name }}"
+    when: item.status.printableStatus != "Stopped"
+
   - name: Verify VM to Snapshot Provided
     ansible.builtin.assert:
       that:
