@@ -1,6 +1,7 @@
 ---
 - name: Create Malware Incident
   gather_facts: no
+  tasks:
   - name: Verify VM to Snapshot Provided
     ansible.builtin.assert:
       that:
